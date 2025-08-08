@@ -15,6 +15,18 @@
       <guid>https://aditya-nandani.github.io/about/</guid>
       <description>&lt;p&gt;Hi! I&amp;rsquo;m Aditya 👋&lt;br&gt;
 I&amp;rsquo;m a developer, learner, and curious mind. I write about tech, projects, tutorials, and whatever excites me. Thanks for stopping by!&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Hi! I&rsquo;m Aditya 👋<br>
+I&rsquo;m a developer, learner, and curious mind. I write about tech, projects, tutorials, and whatever excites me. Thanks for stopping by!</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Linux Bash Reference</title>
+      <link>https://aditya-nandani.github.io/posts/linux-bash-reference/</link>
+      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>https://aditya-nandani.github.io/posts/linux-bash-reference/</guid>
+      <description>Linux Bash reference for bash scripting with helpful features.</description>
+      <content:encoded><![CDATA[<p>This is a comprehensive reference for Bash scripting.</p>
+]]></content:encoded>
     </item>
     <item>
       <title>Essential Linux Commands reference</title>
