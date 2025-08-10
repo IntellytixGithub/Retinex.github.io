@@ -105,7 +105,7 @@ It works by:</p>
 <p><strong>Original Image:</strong><br>
 <img alt="Original Image" loading="lazy" src="images/input.jpg"></p>
 <p><strong>SSR Enhanced Image:</strong><br>
-<img alt="SSR Enhanced Image" loading="lazy" src="images/output.jpg"></p>
+<img alt="SSR Enhanced Image" loading="lazy" src="images/result.png"></p>
 <h2 id="observations">Observations</h2>
 <ul>
 <li>Shadows are brighter, revealing hidden details.</li>
