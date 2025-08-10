@@ -20,6 +20,131 @@ Whether it’s nighttime driving, navigating through tunnels, or facing bad weat
 This reduced quality makes it harder for the perception system to detect lane markings, pedestrians, and obstacles — ultimately impacting safety.</p>
 <p>To address this, image enhancement techniques are used to improve brightness and bring out hidden details without distorting the scene. One such powerful method is Single Scale Retinex (SSR) — a technique inspired by the way our eyes and brain perceive images under different lighting conditions.</p>
 <p>In this blog, we’ll explore the fundamentals of SSR, understand its working principle, implement it in Python, and analyze its results.</p>
+<h2 id="retinex-theory--a-quick-background">Retinex Theory – A Quick Background</h2>
+<p>The Retinex theory, proposed by Edwin H. Land, is based on the combined action of the retina (light detection) and the cortex (visual processing) in the human visual system.
+Its goal is color constancy — ensuring that objects appear with the same color, regardless of lighting.</p>
+<p>Key Idea:
+An image can be thought of as the product of:</p>
+<pre><code>Reflectance (R) → the true color and texture of objects.
+
+Illumination (L) → the varying light falling on the scene.
+</code></pre>
+<p>Mathematically:</p>
+<pre><code>I(x,y) = R(x,y) × L(x,y)
+</code></pre>
+<p>The Retinex approach extracts reflectance by removing the illumination component:</p>
+<pre><code>R(x,y)=log(I(x,y))−log(L(x,y))
+</code></pre>
+<p>This logarithmic operation compresses dynamic range and reduces lighting effects.</p>
+<h2 id="single-scale-retinex-ssr">Single Scale Retinex (SSR)</h2>
+<p>Single Scale Retinex applies the Retinex formula at a single Gaussian scale.
+It works by:</p>
+<p>1.Converting the image to a floating-point format and avoiding log(0) by adding a      small constant.</p>
+<p>2.Applying a Gaussian blur to estimate the illumination.</p>
+<p>3.Subtracting the blurred image (illumination) from the original image in the log domain.</p>
+<p>4.Normalizing the output for display.</p>
+<p>The Gaussian scale parameter (σ) is crucial:</p>
+<pre><code>Small σ → enhances small details but may introduce noise.
+
+Large σ → smoothens illumination more but reduces fine detail enhancement.
+</code></pre>
+<p>Formula:</p>
+<pre><code>Rssr(x,y) = log(I(x,y)) − log(Gσ ∗ I(x,y))
+</code></pre>
+<p>Where:</p>
+<pre><code>Gσ = Gaussian kernel with standard deviation σ.
+</code></pre>
+<h2 id="implementation-in-python">Implementation in Python</h2>
+<p>Here’s a simple implementation using OpenCV and NumPy:</p>
+<p>import numpy as np
+import cv2</p>
+<h1 id="function-core-ssr-formula">Function: Core SSR formula</h1>
+<h1 id="applies-single-scale-retinex-to-an-image-using-gaussian-blur">Applies Single Scale Retinex to an image using Gaussian blur</h1>
+<p>def singleScaleRetinex(img, variance):
+# SSR formula: log of image - log of blurred image
+retinex = np.log10(img) - np.log10(cv2.GaussianBlur(img, (0, 0), variance))
+return retinex</p>
+<h1 id="function-full-ssr-pipeline-with-clipping-and-normalization">Function: Full SSR Pipeline with Clipping and Normalization</h1>
+<p>def SSR(img, variance):
+# Convert image to float64 for precision and avoid log(0) by adding 1
+img = np.float64(img) + 1.0</p>
+<pre><code># Apply Single Scale Retinex
+img_retinex = singleScaleRetinex(img, variance)
+
+# Process each channel (B, G, R)
+for i in range(img_retinex.shape[2]):
+    # Create a histogram of pixel values by quantizing (×100 to preserve 2 decimals)
+    unique, count = np.unique(np.int32(img_retinex[:, :, i] * 100), return_counts=True)
+
+    # Find how often the value near 0 appears, used for clipping reference
+    for u, c in zip(unique, count):
+        if u == 0:
+            zero_count = c
+            break
+
+    # Initialize clipping range with min and max values
+    low_val = unique[0] / 100.0
+    high_val = unique[-1] / 100.0
+
+    # Dynamically adjust clipping range based on rare value threshold (10% of zero_count)
+    for u, c in zip(unique, count):
+        if u &lt; 0 and c &lt; zero_count * 0.1:
+            low_val = u / 100.0
+        if u &gt; 0 and c &lt; zero_count * 0.1:
+            high_val = u / 100.0
+            break
+
+    # Clip extreme values to within [low_val, high_val]
+    img_retinex[:, :, i] = np.maximum(np.minimum(img_retinex[:, :, i], high_val), low_val)
+
+    # Normalize the pixel values to 0–255 for display
+    img_retinex[:, :, i] = (img_retinex[:, :, i] - np.min(img_retinex[:, :, i])) / \
+                           (np.max(img_retinex[:, :, i]) - np.min(img_retinex[:, :, i])) \
+                           * 255
+
+# Convert final result to uint8 for OpenCV display
+img_retinex = np.uint8(img_retinex)
+return img_retinex
+</code></pre>
+<h1 id="set-gaussian-variance-larger--more-global-illumination-estimation">Set Gaussian variance (larger = more global illumination estimation)</h1>
+<p>variance = 500</p>
+<h1 id="read-input-image-eg-a-frame-from-an-autonomous-vehicle-camera">Read input image (e.g., a frame from an autonomous vehicle camera)</h1>
+<p>img = cv2.imread(&rsquo;./test/test2.jpg&rsquo;)  # Make sure the path is correct</p>
+<h1 id="apply-ssr-enhancement">Apply SSR enhancement</h1>
+<p>img_ssr = SSR(img, variance)</p>
+<h1 id="display-the-original-image">Display the original image</h1>
+<p>cv2.imshow(&lsquo;Original&rsquo;, img)</p>
+<h1 id="display-the-ssr-enhanced-image">Display the SSR-enhanced image</h1>
+<p>cv2.imshow(&lsquo;SSR&rsquo;, img_ssr)</p>
+<h1 id="save-the-enhanced-image-to-disk">Save the enhanced image to disk</h1>
+<p>cv2.imwrite(&lsquo;SSR.jpg&rsquo;, img_ssr)</p>
+<h1 id="wait-for-key-press-before-closing-image-windows">Wait for key press before closing image windows</h1>
+<p>cv2.waitKey(0)
+cv2.destroyAllWindows()</p>
+<h2 id="results">Results</h2>
+<p>Below are the results of applying SSR to a low-light road scene:</p>
+<p>Original Image	SSR Enhanced Image</p>
+<h2 id="observation">Observation:</h2>
+<pre><code>Shadows are brighter, revealing hidden details.
+The overall contrast is improved.
+Road markings and objects are more visible.
+</code></pre>
+<h2 id="advantages--limitations">Advantages &amp; Limitations</h2>
+<h1 id="advantages">Advantages:</h1>
+<pre><code>Simple and computationally efficient.
+Effective in enhancing visibility.
+Works well for many natural images.
+</code></pre>
+<h1 id="limitations">Limitations:</h1>
+<pre><code>May produce halo effects around bright objects.
+Can amplify noise in very dark areas.
+One scale may not handle varying illumination across the image — leading to the need for Multi-Scale Retinex (MSR).
+</code></pre>
+<h2 id="references">References</h2>
+<pre><code>Land, E. H., “The Retinex Theory of Color Vision,” Scientific American, 1977.
+Jobson, D. J., Rahman, Z., and Woodell, G. A., “Properties and performance of a center/surround retinex,” IEEE Trans. Image Processing, 1997.
+OpenCV documentation.
+</code></pre>
 ]]></content:encoded>
     </item>
   </channel>
