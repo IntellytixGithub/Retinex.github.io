@@ -14,6 +14,13 @@
       <pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate>
       <guid>https://aditya-nandani.github.io/posts/single-scale-retinex/</guid>
       <description>A detailed explanation and implementation guide of Single Scale Retinex (SSR) for improving visibility in low-light driving conditions.</description>
+      <content:encoded><![CDATA[<h2 id="introduction">Introduction</h2>
+<p>Driving in low-light conditions poses a serious challenge for autonomous vehicles.
+Whether it’s nighttime driving, navigating through tunnels, or facing bad weather, the camera feed often suffers from poor visibility.
+This reduced quality makes it harder for the perception system to detect lane markings, pedestrians, and obstacles — ultimately impacting safety.</p>
+<p>To address this, image enhancement techniques are used to improve brightness and bring out hidden details without distorting the scene. One such powerful method is Single Scale Retinex (SSR) — a technique inspired by the way our eyes and brain perceive images under different lighting conditions.</p>
+<p>In this blog, we’ll explore the fundamentals of SSR, understand its working principle, implement it in Python, and analyze its results.</p>
+]]></content:encoded>
     </item>
   </channel>
 </rss>
