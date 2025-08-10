@@ -86,7 +86,7 @@ It works by:</p>
 </span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        img_retinex[:, :, i] <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>maximum(np<span style="color:#f92672">.</span>minimum(img_retinex[:, :, i], high_val), low_val)
-</span></span><span style="display:flex;"><span>        img_retinex[:, :, i] <span style="color:#f92672">=</span> (img_retinex[:, :, i] <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(img_retinex[:, :, i])) <span style="color:#f92672">/</span>                                (np<span style="color:#f92672">.</span>max(img_retinex[:, :, i]) <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(img_retinex[:, :, i])) <span style="color:#f92672">*</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span>        img_retinex[:, :, i] <span style="color:#f92672">=</span> (img_retinex[:, :, i] <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(img_retinex[:, :, i])) <span style="color:#f92672">/</span>(np<span style="color:#f92672">.</span>max(img_retinex[:, :, i]) <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>min(img_retinex[:, :, i])) <span style="color:#f92672">*</span> <span style="color:#ae81ff">255</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    img_retinex <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>uint8(img_retinex)
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> img_retinex
@@ -131,15 +131,6 @@ It works by:</p>
 <li>Jobson, D. J., Rahman, Z., and Woodell, G. A., “Properties and performance of a center/surround retinex,” <em>IEEE Trans. Image Processing</em>, 1997.</li>
 <li>OpenCV documentation.</li>
 </ol>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>Linux Bash Reference</title>
-      <link>https://aditya-nandani.github.io/posts/linux-bash-reference/</link>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://aditya-nandani.github.io/posts/linux-bash-reference/</guid>
-      <description>Linux Bash reference for bash scripting with helpful features.</description>
-      <content:encoded><![CDATA[<p>This is a comprehensive reference for Bash scripting.</p>
 ]]></content:encoded>
     </item>
     <item>

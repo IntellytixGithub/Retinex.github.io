@@ -6,17 +6,8 @@
     <description>Recent content in Linux on Aditya Nandani</description>
     <generator>Hugo -- 0.148.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 07 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://aditya-nandani.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Linux Bash Reference</title>
-      <link>https://aditya-nandani.github.io/posts/linux-bash-reference/</link>
-      <pubDate>Thu, 07 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>https://aditya-nandani.github.io/posts/linux-bash-reference/</guid>
-      <description>Linux Bash reference for bash scripting with helpful features.</description>
-      <content:encoded><![CDATA[<p>This is a comprehensive reference for Bash scripting.</p>
-]]></content:encoded>
-    </item>
     <item>
       <title>Essential Linux Commands reference</title>
       <link>https://aditya-nandani.github.io/posts/my-first-post/</link>
