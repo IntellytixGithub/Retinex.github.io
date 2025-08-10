@@ -103,9 +103,9 @@ It works by:</p>
 </span></span></code></pre></div><h2 id="results">Results</h2>
 <p>Below are the results of applying SSR to a low-light road scene:</p>
 <p><strong>Original Image:</strong><br>
-<img alt="Original Image" loading="lazy" src="images/input.jpg"></p>
+<img alt="Original Image" loading="lazy" src="/images/input.jpg"></p>
 <p><strong>SSR Enhanced Image:</strong><br>
-<img alt="SSR Enhanced Image" loading="lazy" src="images/result.png"></p>
+<img alt="SSR Enhanced Image" loading="lazy" src="/images/result.png"></p>
 <h2 id="observations">Observations</h2>
 <ul>
 <li>Shadows are brighter, revealing hidden details.</li>
